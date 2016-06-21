@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+
+	<definition name="contactLayout" extends="mainLayout">
+		<put-attribute name="header" value="Contacts"/>
+		<put-attribute name="optDescription" value=""/>
+	</definition>
+
+	<definition name="contact.create" extends="contactLayout">
+		<put-attribute name="content" value="/WEB-INF/tiles/contact/create.jsp"/>
+		<put-attribute name="optDescription" value="Create a new contact"/>
+	</definition>
+
+	<definition name="contact.edit" extends="contactLayout">
+		<put-attribute name="content" value="/WEB-INF/tiles/contact/edit.jsp"/>
+		<put-attribute name="optDescription" value="Edit contact"/>
+	</definition>
+
+	<definition name="contact.list" extends="contactLayout">
+		<put-attribute name="content" value="/WEB-INF/tiles/contact/list.jsp"/>
+		<put-attribute name="optDescription" value=""/>
+	</definition>
+
+</tiles-definitions>

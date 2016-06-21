@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+	<definition name="customerLayout" extends="mainLayout">
+		<put-attribute name="header" value="Customers"/>
+	</definition>
+
+	<definition name="customer.create" extends="customerLayout">
+		<put-attribute name="content" value="/WEB-INF/tiles/customer/create.jsp"/>
+		<put-attribute name="optDescription" value="Create a new customer"/>
+	</definition>
+
+	<definition name="customer.edit" extends="customerLayout">
+		<put-attribute name="content" value="/WEB-INF/tiles/customer/edit.jsp"/>
+		<put-attribute name="optDescription" value="Edit customer"/>
+	</definition>
+
+	<definition name="customer.list" extends="customerLayout">
+		<put-attribute name="content" value="/WEB-INF/tiles/customer/list.jsp"/>
+		<put-attribute name="optDescription" value=""/>
+	</definition>
+
+	<definition name="customer.view" extends="customerLayout">
+		<put-attribute name="content" value="/WEB-INF/tiles/customer/view.jsp"/>
+		<put-attribute name="optDescription" value=""/>
+	</definition>
+
+</tiles-definitions>
