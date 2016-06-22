@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 
 public class CustomerModel implements Serializable {
@@ -21,6 +22,9 @@ public class CustomerModel implements Serializable {
     private String company;
     private Date initDate;
     private String notes;
+    private AddressModel currentAddress;
+    private List<AddressModel> previousAddress;
+    private List<ContactModel> contacts;
 
 	
     public Integer getId() {
@@ -78,7 +82,31 @@ public class CustomerModel implements Serializable {
 
 
 	
-    public String toString() {
+    public AddressModel getCurrentAddress() {
+		return currentAddress;
+	}
+
+	public void setCurrentAddress(AddressModel currentAddress) {
+		this.currentAddress = currentAddress;
+	}
+
+	public List<AddressModel> getPreviousAddress() {
+		return previousAddress;
+	}
+
+	public void setPreviousAddress(List<AddressModel> previousAddress) {
+		this.previousAddress = previousAddress;
+	}
+
+	public List<ContactModel> getContacts() {
+		return contacts;
+	}
+
+	public void setContacts(List<ContactModel> contacts) {
+		this.contacts = contacts;
+	}
+
+	public String toString() {
 				StringBuffer sb = new StringBuffer();
 				Field[] fields = this.getClass().getDeclaredFields();
         		for (Field field : fields) {

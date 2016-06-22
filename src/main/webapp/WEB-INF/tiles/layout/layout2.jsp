@@ -22,6 +22,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Theme style -->
+<!-- jQuery 2.2.0 -->
+<script src="${pageContext.request.contextPath}/plugins/jQuery/jQuery-2.2.0.min.js"></script>
+<!-- Bootstrap 3.3.6 -->
+<script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js"></script>
+<!-- AdminLTE App -->
+<script src="${pageContext.request.contextPath}/js/app.min.js"></script>
   <link rel="stylesheet" href="${pageContext.request.contextPath}/css/AdminLTE.min.css">
   <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
         page. However, you can choose any other skin. Make sure you
@@ -189,12 +195,6 @@ desired effect
 
 <!-- REQUIRED JS SCRIPTS -->
 
-<!-- jQuery 2.2.0 -->
-<script src="${pageContext.request.contextPath}/plugins/jQuery/jQuery-2.2.0.min.js"></script>
-<!-- Bootstrap 3.3.6 -->
-<script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js"></script>
-<!-- AdminLTE App -->
-<script src="${pageContext.request.contextPath}/js/app.min.js"></script>
 <script>
 //Skin switcher
   var current_skin = "skin-blue";

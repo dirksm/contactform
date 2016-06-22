@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -94,7 +95,50 @@ public class AddressDAO implements DBConstants {
         int numRows = getTemplate().update(sUpdateStmt.toString(), args);
         return numRows;
     }
+    
+    public int inactivateAddressForCustomer(Integer customerId) {
+    	StringBuffer sUpdateStmt = new StringBuffer(200);
+        sUpdateStmt.append("UPDATE " + CUSTOMER_ADDRESS)
+        .append(" SET ")
+        .append(" date_address_to = ? " );
+        StringBuffer sWhereStmt = new StringBuffer(100);
+        sWhereStmt.append(" WHERE customer_id = ?");
+        sUpdateStmt.append( sWhereStmt );
+        Object[] args = {new Date(),customerId};
+        int numRows = getTemplate().update(sUpdateStmt.toString(), args);
+        return numRows;
+    }
 
+    public AddressModel getCurrentAddress(Integer customerId) {
+        String sqlString = "select " +
+        "id" +
+        ", address_1" +
+        ", address_2" +
+        ", city" +
+        ", state" +
+        ", (select name from states s where s.id = addr.state) as longState" +
+        ", (select abbrev from states s where s.id = addr.state) as shortState" +
+        ", zip" +
+        ", notes" +
+        " from " + ADDRESS + " addr where id = (select address_id from " + CUSTOMER_ADDRESS + " where customer_id = ? and date_address_to is null)";
+        Object[] args = {customerId};
+        List<AddressModel> matches = getTemplate().query(sqlString, args, new RowMapper<AddressModel>() {
+            public AddressModel mapRow(ResultSet rs, int rowNum) throws SQLException {
+                AddressModel model = new AddressModel();
+                    model.setId(rs.getInt("id"));
+                    model.setAddress1(rs.getString("address_1"));
+                    model.setAddress2(rs.getString("address_2"));
+                    model.setCity(rs.getString("city"));
+                    model.setState(rs.getInt("state"));
+                    model.setShortState(rs.getString("shortState"));
+                    model.setLongState(rs.getString("longState"));
+                    model.setZip(rs.getString("zip"));
+                    model.setNotes(rs.getString("notes"));
+                return model;
+            }
+        });
+        return matches!=null&&matches.size()>0?matches.get(0):null;
+    }
 
     public AddressModel getAddress(Integer id) {
     String sqlString = "select " +

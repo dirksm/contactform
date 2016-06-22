@@ -1,15 +1,16 @@
 package gov.mo.dolir.services;
  
 import java.util.List;
- 
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
+import gov.mo.dolir.dao.AddressDAO;
+import gov.mo.dolir.dao.ContactDAO;
 import gov.mo.dolir.dao.CustomerDAO;
 import gov.mo.dolir.models.CustomerModel;
 
@@ -23,6 +24,10 @@ public class CustomerService {
 	 
     @Autowired
     private CustomerDAO customerDao;
+    @Autowired
+    private AddressDAO addressDao;
+    @Autowired
+    private ContactDAO contactDao;
 	 
 
     public List<CustomerModel> getCustomerList() {
@@ -31,7 +36,12 @@ public class CustomerService {
 
 
     public CustomerModel getCustomer(Integer id) {
-        return customerDao.getCustomer(id);
+    	CustomerModel customer = customerDao.getCustomer(id);
+    	if (customer != null) {
+    		customer.setCurrentAddress(addressDao.getCurrentAddress(customer.getId()));
+    		customer.setContacts(contactDao.getContactsForCustomer(customer.getId()));
+		}
+        return customer;
     }
 
 	 

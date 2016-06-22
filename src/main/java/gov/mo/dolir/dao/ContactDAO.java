@@ -211,6 +211,47 @@ public class ContactDAO implements DBConstants {
         });
     }
 
+    public List<ContactModel> getContactsForCustomer(Integer customerId) {
+    String sqlString = "select " +
+        "id" +
+        ", customer_id" +
+        ", (select company from " + CUSTOMER + " c where c.id = customer_id) as companyName" +
+        ", status_cd" +
+        ", (select description from " + CONTACT_STATUS + " s where s.id = status_cd) as status" +
+        ", email" +
+        ", website" +
+        ", salutation" +
+        ", contact_name" +
+        ", title" +
+        ", dept" +
+        ", work_phone" +
+        ", cell_phone" +
+        ", fax" +
+        ", notes" +
+        " from " + CONTACT + " where customer_id = ?";
+    	Object[] args = {customerId};
+    	return getTemplate().query(sqlString, args, new RowMapper<ContactModel>() {
+            public ContactModel mapRow(ResultSet rs, int rowNum) throws SQLException {
+                ContactModel model = new ContactModel();
+                    model.setId(rs.getInt("id"));
+                    model.setCustomerId(rs.getInt("customer_id"));
+                    model.setStatusCd(rs.getInt("status_cd"));
+                    model.setCompanyName(rs.getString("companyName"));
+                    model.setStatus(rs.getString("status"));
+                    model.setEmail(rs.getString("email"));
+                    model.setWebsite(rs.getString("website"));
+                    model.setSalutation(rs.getInt("salutation"));
+                    model.setContactName(rs.getString("contact_name"));
+                    model.setTitle(rs.getString("title"));
+                    model.setDept(rs.getString("dept"));
+                    model.setWorkPhone(rs.getString("work_phone"));
+                    model.setCellPhone(rs.getString("cell_phone"));
+                    model.setFax(rs.getString("fax"));
+                    model.setNotes(rs.getString("notes"));
+                return model;
+            }
+        });
+    }
 
     public int deleteContact(Integer id) {
         StringBuffer sDeleteStmt = new StringBuffer(200);
