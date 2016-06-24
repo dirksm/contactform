@@ -39,6 +39,7 @@ public class CustomerService {
     	CustomerModel customer = customerDao.getCustomer(id);
     	if (customer != null) {
     		customer.setCurrentAddress(addressDao.getCurrentAddress(customer.getId()));
+    		customer.setPreviousAddress(addressDao.getPreviousAddress(customer.getId()));
     		customer.setContacts(contactDao.getContactsForCustomer(customer.getId()));
 		}
         return customer;

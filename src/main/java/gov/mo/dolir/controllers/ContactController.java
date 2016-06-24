@@ -57,16 +57,26 @@ public class ContactController {
 		return "contact.create";
 	}
 	
+	@RequestMapping(value="/create/{customerId}", method=RequestMethod.GET)
+	public String newContact(ModelMap map, @PathVariable String customerId) {
+		map.addAttribute("contactForm", new ContactModel(new Integer(customerId)));
+		map.addAttribute("customers", customerService.getCustomerList());
+		map.addAttribute("statuses", contactStatusService.getContactStatusList());
+		return "contact.create";
+	}
+	
 	@RequestMapping(value="/create", method=RequestMethod.POST)
 	public String saveNewContact(@ModelAttribute("contactForm") ContactModel model, ModelMap map) {
 		contactService.createContact(model);
-		return "redirect:/contacts/list";
+		return "redirect:/customers/view/"+model.getCustomerId();
 	}
 
 	@RequestMapping(value="/delete/{id}")
 	public String saveNewContact(@PathVariable String id, ModelMap map) {
+		ContactModel model = contactService.getContact(new Integer(id));
+		Integer customerId = model.getCustomerId();
 		contactService.deleteContact(new Integer(id));
-		return "redirect:/contacts/list";
+		return "redirect:/customers/view/"+customerId;
 	}
 
 }

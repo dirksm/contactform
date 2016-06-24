@@ -2,6 +2,7 @@ package gov.mo.dolir.controllers;
 
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -45,17 +46,28 @@ public class AddressController {
 		return "redirect:/addresses/list";
 	}
 
+	@RequestMapping(value="/create/{customerId}", method=RequestMethod.GET)
+	public String newAddress(ModelMap map, @PathVariable String customerId ) {
+		map.addAttribute("addressForm", new AddressModel(new Integer(customerId)));
+		map.addAttribute("stateList", statesService.getStatesList());
+		return "address.create";
+	}
+	
 	@RequestMapping(value="/create", method=RequestMethod.GET)
 	public String newAddress(ModelMap map) {
 		map.addAttribute("addressForm", new AddressModel());
 		map.addAttribute("stateList", statesService.getStatesList());
 		return "address.create";
 	}
-	
+
 	@RequestMapping(value="/create", method=RequestMethod.POST)
 	public String saveNewAddress(@ModelAttribute("addressForm") AddressModel model, ModelMap map) {
 		addressService.createAddress(model);
-		return "redirect:/addresses/list";
+		if (model.getCustomerId().intValue()!=0) {
+			return "redirect:/customers/view/"+model.getCustomerId();
+		} else {
+			return "redirect:/customers/list";
+		}
 	}
 
 	@RequestMapping(value="/delete/{id}")

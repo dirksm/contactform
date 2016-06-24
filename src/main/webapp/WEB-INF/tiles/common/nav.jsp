@@ -11,6 +11,7 @@
                 <li><a href="${pageContext.request.contextPath}/customers/create/"><i class="fa fa-file-o"></i> Add Customer</a></li>
           </ul>
         </li>
+<%-- 
         <li class="treeview">
             <a href="#">
                 <i class="fa fa-users"></i> <span>Contacts</span> <i class="fa fa-angle-left pull-right"></i>
@@ -29,6 +30,7 @@
                 <li><a href="${pageContext.request.contextPath}/addresses/create/"><i class="fa fa-file-o"></i> Add Address</a></li>
             </ul>
         </li>
+--%>
         <li class="treeview">
           <a href="#">
             <i class="fa fa-files-o"></i>

@@ -30,6 +30,15 @@ public class ContactModel implements Serializable {
     private String notes;
     private String companyName;
     private String status;
+    
+    public ContactModel() {
+    	
+    }
+    
+    public ContactModel(Integer customerId) {
+    	this();
+    	setCustomerId(customerId);
+    }
 
 	
     public Integer getId() {
@@ -167,34 +176,12 @@ public class ContactModel implements Serializable {
 		this.status = status;
 	}
 
+	@Override
 	public String toString() {
-				StringBuffer sb = new StringBuffer();
-				Field[] fields = this.getClass().getDeclaredFields();
-        		for (Field field : fields) {
-				try {
-					Method getter = null;
-					if (!"log".equals(field.getName())) {
-						if(field.getType() == Boolean.class) {
-							if (StringUtils.isAllUpperCase(field.getName())) {
-								getter = this.getClass().getMethod("is"+field.getName(), null);
-							} else {
-						        getter = this.getClass().getMethod("is"+StringUtils.capitalize(field.getName()), null);
-							}
-						} else {
-							if (StringUtils.isAllUpperCase(field.getName())) {
-								getter = this.getClass().getMethod("get"+field.getName(), null);
-							} else {
-						        getter = this.getClass().getMethod("get"+StringUtils.capitalize(field.getName()), null);
-							}
-						}
-						sb.append(field.getName()+": ");
-						sb.append(getter.invoke(this, null)).append(" ");
-					}
-				} catch (Exception e) {
-					log.error("Exception outputting toString: " + e.getMessage(), e);
-				}
-			}
-        return sb.toString();
-    }
+		return "ContactModel [id=" + id + ", customerId=" + customerId + ", statusCd=" + statusCd + ", email=" + email
+				+ ", website=" + website + ", salutation=" + salutation + ", contactName=" + contactName + ", title="
+				+ title + ", dept=" + dept + ", workPhone=" + workPhone + ", cellPhone=" + cellPhone + ", fax=" + fax
+				+ ", notes=" + notes + ", companyName=" + companyName + ", status=" + status + "]";
+	}
 
 }

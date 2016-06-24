@@ -12,7 +12,7 @@
 	<div class="col-md-12">
 
 		<html:form class="form-horizontal" action='${pageContext.request.contextPath}/addresses/create' method='POST' modelAttribute="addressForm">
-
+		<html:hidden path="customerId"/>
 			<div class="form-group">
 				<label class="col-md-4 control-label" for="address_1">address_1</label>
 				<div class="col-md-4">

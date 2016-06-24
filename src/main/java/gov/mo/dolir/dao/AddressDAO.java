@@ -16,6 +16,7 @@ import org.springframework.stereotype.Repository;
 
 import gov.mo.dolir.constants.DBConstants;
 import gov.mo.dolir.models.AddressModel;
+import gov.mo.dolir.models.CustomerAddressModel;
 
 
 @Repository("addressDao")
@@ -138,6 +139,43 @@ public class AddressDAO implements DBConstants {
             }
         });
         return matches!=null&&matches.size()>0?matches.get(0):null;
+    }
+
+    public List<CustomerAddressModel> getPreviousAddress(Integer customerId) {
+        String sqlString = "select " +
+        "id" +
+        ", address_1" +
+        ", address_2" +
+        ", city" +
+        ", state" +
+        ", (select name from states s where s.id = addr.state) as longState" +
+        ", (select abbrev from states s where s.id = addr.state) as shortState" +
+        ", zip" +
+        ", customer_id" + 
+        ", date_address_from" + 
+        ", date_address_to" +
+        " from " + ADDRESS + " addr " +
+        " join " + CUSTOMER_ADDRESS + " caddr on (caddr.address_id = addr.id)" +
+        " where customer_id = ? and date_address_to is not null order by date_address_to desc";
+        Object[] args = {customerId};
+        return getTemplate().query(sqlString, args, new RowMapper<CustomerAddressModel>() {
+            public CustomerAddressModel mapRow(ResultSet rs, int rowNum) throws SQLException {
+            	CustomerAddressModel model = new CustomerAddressModel();
+                    model.setId(rs.getInt("id"));
+                    model.setAddressId(rs.getInt("id"));
+                    model.setCustomerId(rs.getInt("customer_id"));
+                    model.setAddress1(rs.getString("address_1"));
+                    model.setAddress2(rs.getString("address_2"));
+                    model.setCity(rs.getString("city"));
+                    model.setState(rs.getInt("state"));
+                    model.setShortState(rs.getString("shortState"));
+                    model.setLongState(rs.getString("longState"));
+                    model.setZip(rs.getString("zip"));
+                    model.setDateAddressFrom(rs.getDate("date_address_from")!=null?new java.util.Date(rs.getDate("date_address_from").getTime()):null);
+                    model.setDateAddressTo(rs.getDate("date_address_to")!=null?new java.util.Date(rs.getDate("date_address_to").getTime()):null);
+                return model;
+            }
+        });
     }
 
     public AddressModel getAddress(Integer id) {

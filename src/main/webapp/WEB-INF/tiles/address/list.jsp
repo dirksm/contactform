@@ -17,8 +17,6 @@
 		<table class="table table-condensed">
 			<thead>
 				<tr>
-					<th></th>
-					<th></th>
 					<th>id</th>
 					<th>Address</th>
 					<th>Address 2</th>
@@ -31,10 +29,6 @@
 			<tbody>
 			<c:forEach items="${addresses}" var="address">
 				<tr>
-					<td><a role="button" class="btn btn-sm btn-primary"
-						href="${pageContext.request.contextPath}/addresses/edit/${address.id}">Edit</a></td>
-					<td><a role="button" class="btn btn-sm btn-danger"
-						href="${pageContext.request.contextPath}/addresses/delete/${address.id}">Delete</a></td>
 					<td>${address.id}</td>
 					<td>${address.address1}</td>
 					<td>${address.address2}</td>

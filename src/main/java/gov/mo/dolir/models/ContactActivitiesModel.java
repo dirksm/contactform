@@ -79,32 +79,11 @@ public class ContactActivitiesModel implements Serializable {
 
 
 	
-    public String toString() {
-				StringBuffer sb = new StringBuffer();
-				Field[] fields = this.getClass().getDeclaredFields();
-        		for (Field field : fields) {
-				try {
-					Method getter = null;
-					if(field.getType() == Boolean.class) {
-						if (StringUtils.isAllUpperCase(field.getName())) {
-							getter = this.getClass().getMethod("is"+field.getName(), null);
-						} else {
-					        getter = this.getClass().getMethod("is"+StringUtils.capitalize(field.getName()), null);
-						}
-					} else {
-						if (StringUtils.isAllUpperCase(field.getName())) {
-							getter = this.getClass().getMethod("get"+field.getName(), null);
-						} else {
-					        getter = this.getClass().getMethod("get"+StringUtils.capitalize(field.getName()), null);
-						}
-					}
-					sb.append(field.getName()+": ");
-					sb.append(getter.invoke(this, null)).append("");
-				} catch (Exception e) {
-					log.error("Exception outputting toString: " + e.getMessage(), e);
-				}
-			}
-        return sb.toString();
-    }
+    @Override
+	public String toString() {
+		return "ContactActivitiesModel [id=" + id + ", contactId=" + contactId + ", activityTypeId=" + activityTypeId
+				+ ", activityOutcomeId=" + activityOutcomeId + ", activityDate=" + activityDate + ", notes=" + notes
+				+ "]";
+	}
 
 }

@@ -23,7 +23,7 @@ public class CustomerModel implements Serializable {
     private Date initDate;
     private String notes;
     private AddressModel currentAddress;
-    private List<AddressModel> previousAddress;
+    private List<CustomerAddressModel> previousAddress;
     private List<ContactModel> contacts;
 
 	
@@ -90,11 +90,11 @@ public class CustomerModel implements Serializable {
 		this.currentAddress = currentAddress;
 	}
 
-	public List<AddressModel> getPreviousAddress() {
+	public List<CustomerAddressModel> getPreviousAddress() {
 		return previousAddress;
 	}
 
-	public void setPreviousAddress(List<AddressModel> previousAddress) {
+	public void setPreviousAddress(List<CustomerAddressModel> previousAddress) {
 		this.previousAddress = previousAddress;
 	}
 
@@ -106,34 +106,11 @@ public class CustomerModel implements Serializable {
 		this.contacts = contacts;
 	}
 
+	@Override
 	public String toString() {
-				StringBuffer sb = new StringBuffer();
-				Field[] fields = this.getClass().getDeclaredFields();
-        		for (Field field : fields) {
-				try {
-					Method getter = null;
-					if (!"log".equals(field.getName())) {
-						if(field.getType() == Boolean.class) {
-							if (StringUtils.isAllUpperCase(field.getName())) {
-								getter = this.getClass().getMethod("is"+field.getName(), null);
-							} else {
-						        getter = this.getClass().getMethod("is"+StringUtils.capitalize(field.getName()), null);
-							}
-						} else {
-							if (StringUtils.isAllUpperCase(field.getName())) {
-								getter = this.getClass().getMethod("get"+field.getName(), null);
-							} else {
-						        getter = this.getClass().getMethod("get"+StringUtils.capitalize(field.getName()), null);
-							}
-						}
-						sb.append(field.getName()+": ");
-						sb.append(getter.invoke(this, null)).append(" ");
-					}
-				} catch (Exception e) {
-					log.error("Exception outputting toString: " + e.getMessage(), e);
-				}
-			}
-        return sb.toString();
-    }
+		return "CustomerModel [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", company="
+				+ company + ", initDate=" + initDate + ", notes=" + notes + ", currentAddress=" + currentAddress
+				+ ", previousAddress=" + previousAddress + ", contacts=" + contacts + "]";
+	}
 
 }

@@ -16,6 +16,7 @@ public class AddressModel implements Serializable {
 
     private static Logger log = LoggerFactory.getLogger(AddressModel.class);
     private Integer id;
+    private Integer customerId;
     private String address1;
     private String address2;
     private String city;
@@ -25,6 +26,13 @@ public class AddressModel implements Serializable {
     private String zip;
     private String notes;
 
+    public AddressModel() {
+    }
+
+    public AddressModel(Integer customerId) {
+    	this();
+    	setCustomerId(customerId);
+    }
 	
     public Integer getId() {
         return this.id;
@@ -35,7 +43,15 @@ public class AddressModel implements Serializable {
     }
 
 
-    public String getAddress1() {
+    public Integer getCustomerId() {
+		return customerId;
+	}
+
+	public void setCustomerId(Integer customerId) {
+		this.customerId = customerId;
+	}
+
+	public String getAddress1() {
         return this.address1;
     }
 
@@ -104,37 +120,15 @@ public class AddressModel implements Serializable {
         this.notes = notes;
     }
 
+	@Override
+	public String toString() {
+		return "AddressModel [id=" + id + ", customerId=" + customerId + ", address1=" + address1 + ", address2="
+				+ address2 + ", city=" + city + ", state=" + state + ", shortState=" + shortState + ", longState="
+				+ longState + ", zip=" + zip + ", notes=" + notes + "]";
+	}
+
 
 
 	
-    public String toString() {
-				StringBuffer sb = new StringBuffer();
-				Field[] fields = this.getClass().getDeclaredFields();
-        		for (Field field : fields) {
-				try {
-					Method getter = null;
-					if (!"log".equals(field.getName())) {
-						if(field.getType() == Boolean.class) {
-							if (StringUtils.isAllUpperCase(field.getName())) {
-								getter = this.getClass().getMethod("is"+field.getName(), null);
-							} else {
-						        getter = this.getClass().getMethod("is"+StringUtils.capitalize(field.getName()), null);
-							}
-						} else {
-							if (StringUtils.isAllUpperCase(field.getName())) {
-								getter = this.getClass().getMethod("get"+field.getName(), null);
-							} else {
-						        getter = this.getClass().getMethod("get"+StringUtils.capitalize(field.getName()), null);
-							}
-						}
-						sb.append(field.getName()+": ");
-						sb.append(getter.invoke(this, null)).append(" ");
-					}
-				} catch (Exception e) {
-					log.error("Exception outputting toString: " + e.getMessage(), e);
-				}
-			}
-        return sb.toString();
-    }
-
+ 
 }

@@ -1,5 +1,6 @@
 package gov.mo.dolir.services;
  
+import java.util.Date;
 import java.util.List;
  
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import gov.mo.dolir.dao.AddressDAO;
+import gov.mo.dolir.dao.CustomerAddressDAO;
 import gov.mo.dolir.models.AddressModel;
+import gov.mo.dolir.models.CustomerAddressModel;
 
  
  
@@ -23,6 +26,9 @@ public class AddressService {
 	 
     @Autowired
     private AddressDAO addressDao;
+    
+    @Autowired
+    private CustomerAddressDAO customerAddressDao;
 	 
 
     public List<AddressModel> getAddressList() {
@@ -48,7 +54,16 @@ public class AddressService {
 
     @Transactional(propagation=Propagation.REQUIRED)
     public int createAddress(AddressModel bean) {
-    	return addressDao.addAddress(bean);
+    	int addressId = addressDao.addAddress(bean);
+    	if (addressId != 0 && bean.getCustomerId() != 0) {
+			addressDao.inactivateAddressForCustomer(bean.getCustomerId());
+			CustomerAddressModel cam = new CustomerAddressModel();
+			cam.setAddressId(addressId);
+			cam.setCustomerId(bean.getCustomerId());
+			cam.setDateAddressFrom(new Date());
+			customerAddressDao.addCustomerAddress(cam);
+		}
+    	return addressId;
     }
     
     public int getAddressCount() {
