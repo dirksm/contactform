@@ -143,9 +143,9 @@ CREATE TABLE IF NOT EXISTS `contact` (
   `contact_name` varchar(128) default NULL,
   `title` varchar(128) default NULL,
   `dept` varchar(128) default NULL,
-  `work_phone` varchar(10) default NULL,
-  `cell_phone` varchar(10) default NULL,
-  `fax` varchar(10) default NULL,
+  `work_phone` varchar(15) default NULL,
+  `cell_phone` varchar(15) default NULL,
+  `fax` varchar(15) default NULL,
   `notes` text default NULL,  
   PRIMARY KEY (id),
   FOREIGN KEY fk_customer_id(customer_id)

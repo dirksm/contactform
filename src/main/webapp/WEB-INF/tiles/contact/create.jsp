@@ -1,5 +1,16 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="html" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!--  Input Masks -->
+<script src="${pageContext.request.contextPath}/plugins/input-mask/jquery.inputmask.js"></script>
+<script src="${pageContext.request.contextPath}/plugins/input-mask/jquery.extensions.js"></script>
+<script src="${pageContext.request.contextPath}/plugins/input-mask/jquery.date.extensions.js"></script>
+<script src="${pageContext.request.contextPath}/plugins/input-mask/jquery.numeric.extensions.js"></script>
+<script src="${pageContext.request.contextPath}/plugins/input-mask/jquery.phone.extensions.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('.phone').inputmask('(999) 999-9999');
+});
+</script>
 <div class="row">
 	<div class="col-md-12 text-center">
 		<h1>New Contact</h1>
@@ -81,21 +92,21 @@
 				<label class="col-md-4 control-label" for="work_phone">work_phone</label>
 				<div class="col-md-4">
 					<html:input id="work_phone" path="workPhone" type="text"
-						class="form-control input-md"/>
+						class="form-control input-md phone"/>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-md-4 control-label" for="cell_phone">cell_phone</label>
 				<div class="col-md-4">
 					<html:input id="cell_phone" path="cellPhone" type="text"
-						class="form-control input-md"/>
+						class="form-control input-md phone"/>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-md-4 control-label" for="fax">fax</label>
 				<div class="col-md-4">
 					<html:input id="fax" path="fax" type="text"
-						class="form-control input-md"/>
+						class="form-control input-md phone"/>
 				</div>
 			</div>
 			<div class="form-group">
