@@ -8,6 +8,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import gov.mo.dolir.constants.AppConstants;
+import gov.mo.dolir.util.DateUtil;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -58,6 +61,13 @@ public class ContactActivitiesModel implements Serializable {
         this.activityOutcomeId = activityOutcomeId;
     }
 
+    public String getActivityDateStr() {
+        return DateUtil.format(this.activityDate, AppConstants.DATE_FORMAT_PATTERN_MDY);
+    }
+
+    public void setActivityDateStr(String activityDate) {
+        this.activityDate = DateUtil.parse(activityDate, AppConstants.DATE_FORMAT_PATTERN_MDY);
+    }
 
     public Date getActivityDate() {
         return this.activityDate;

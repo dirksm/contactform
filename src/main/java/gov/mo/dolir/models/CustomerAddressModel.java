@@ -5,6 +5,9 @@ import java.util.Date;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import gov.mo.dolir.constants.AppConstants;
+import gov.mo.dolir.util.DateUtil;
+
 
 public class CustomerAddressModel extends AddressModel {
 
@@ -33,6 +36,13 @@ public class CustomerAddressModel extends AddressModel {
         this.addressId = addressId;
     }
 
+    public String getDateAddressFromStr() {
+        return DateUtil.format(this.dateAddressFrom, AppConstants.DATE_FORMAT_PATTERN_MDY);
+    }
+
+    public void setDateAddressFromStr(String dateAddressFrom) {
+        this.dateAddressFrom = DateUtil.parse(dateAddressFrom, AppConstants.DATE_FORMAT_PATTERN_MDY);
+    }
 
     public Date getDateAddressFrom() {
         return this.dateAddressFrom;
@@ -42,6 +52,14 @@ public class CustomerAddressModel extends AddressModel {
         this.dateAddressFrom = dateAddressFrom;
     }
 
+
+    public String getDateAddressToStr() {
+        return DateUtil.format(this.dateAddressTo, AppConstants.DATE_FORMAT_PATTERN_MDY);
+    }
+
+    public void setDateAddressToStr(String dateAddressTo) {
+        this.dateAddressTo = DateUtil.parse(dateAddressTo, AppConstants.DATE_FORMAT_PATTERN_MDY);
+    }
 
     public Date getDateAddressTo() {
         return this.dateAddressTo;

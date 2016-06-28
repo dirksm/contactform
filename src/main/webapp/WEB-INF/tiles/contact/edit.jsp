@@ -2,10 +2,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!--  Input Masks -->
 <script src="${pageContext.request.contextPath}/plugins/input-mask/jquery.inputmask.js"></script>
-<script src="${pageContext.request.contextPath}/plugins/input-mask/jquery.extensions.js"></script>
-<script src="${pageContext.request.contextPath}/plugins/input-mask/jquery.date.extensions.js"></script>
-<script src="${pageContext.request.contextPath}/plugins/input-mask/jquery.numeric.extensions.js"></script>
-<script src="${pageContext.request.contextPath}/plugins/input-mask/jquery.phone.extensions.js"></script>
+<script src="${pageContext.request.contextPath}/plugins/input-mask/jquery.inputmask.extensions.js"></script>
+<script src="${pageContext.request.contextPath}/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+<script src="${pageContext.request.contextPath}/plugins/input-mask/jquery.inputmask.numeric.extensions.js"></script>
+<script src="${pageContext.request.contextPath}/plugins/input-mask/jquery.inputmask.phone.extensions.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
 	$('.phone').inputmask('(999) 999-9999');
@@ -112,11 +112,15 @@ $(document).ready(function(){
 			<div class="form-group">
 				<label class="col-md-4 control-label" for="notes">notes</label>
 				<div class="col-md-4">
-					<html:input id="notes" path="notes" type="text"
-						class="form-control input-md"/>
+					<html:textarea path="notes" id="notes" class="form-control input-md"/>
 				</div>
 			</div>
+			<div class="form-group">
+			 <div class="col-md-4"></div>
+			  <div class="col-md-4">
 			<button role="button" class="btn btn-primary" type='submit'>Save Info</button>
+				</div>
+			</div>
 		</html:form>
 
 	</div>

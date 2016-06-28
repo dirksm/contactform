@@ -8,6 +8,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import gov.mo.dolir.constants.AppConstants;
+import gov.mo.dolir.util.DateUtil;
+
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -62,6 +65,14 @@ public class CustomerModel implements Serializable {
 		this.company = company;
 	}
 
+	public String getInitDateStr() {
+		return DateUtil.format(this.initDate, AppConstants.DATE_FORMAT_PATTERN_MDY);
+	}
+	
+	public void setInitDateStr(String initDate) {
+		this.initDate = DateUtil.parse(initDate, AppConstants.DATE_FORMAT_PATTERN_MDY);
+	}
+	
 	public Date getInitDate() {
         return this.initDate;
     }
