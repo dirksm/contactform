@@ -1,5 +1,6 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -41,6 +42,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
+  <style type="text/css">
+  .breadcrumb {
+  	text-transform: capitalize;
+  }
+  </style>
 </head>
 <!--
 BODY TAG OPTIONS:
@@ -62,7 +68,9 @@ desired effect
 |               | sidebar-mini                            |
 |---------------------------------------------------------|
 -->
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition ${sessionScope.skin!=null?sessionScope.skin:"skin-blue"} sidebar-mini">
+<c:set var="path" value="${pageContext.request.contextPath}${requestScope['javax.servlet.forward.servlet_path']}"/>
+
 <div class="wrapper">
 
   <!-- Main Header -->
@@ -168,9 +176,33 @@ desired effect
         <tiles:insertAttribute name="header"/>
         <small><tiles:insertAttribute name="optDescription"/></small>
       </h1>
+      <c:set var="crumbs" value="${fn:split(path, '/')}"/>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Dashboard</li>
+      <c:forEach items="${crumbs}" var="crumb" varStatus="status">
+      	<c:if test="${status.first}">
+	      <c:set var="hrefprev" value="http://${'localhost'==pageContext.request.serverName ? "localhost:8080":pageContext.request.serverName}/" />
+      	</c:if>
+      	<c:choose>
+      		<c:when test="${status.last}">
+      		<li class="active">
+      		</c:when>
+      		<c:otherwise>
+      		<li>
+      		</c:otherwise>
+      	</c:choose>
+      	<c:set var="href" value="${hrefprev}${crumb}/" />
+      	<c:set var="hrefprev" value="${href}" />
+      	<a href="${href}">
+      	<c:choose>
+      		<c:when test="${status.first}">
+      	<i class="fa fa-dashboard"></i> Home
+      		</c:when>
+      		<c:otherwise>
+      	${crumb}
+      		</c:otherwise>
+      	</c:choose>
+        </a></li>
+      </c:forEach>
       </ol>
     </section>
 
@@ -197,13 +229,19 @@ desired effect
 
 <script>
 //Skin switcher
-  var current_skin = "skin-blue";
+  var current_skin = '${sessionScope.skin!=null?sessionScope.skin:"skin-blue"}';
   $('#layout-skins-list [data-skin]').click(function(e) {
     e.preventDefault();
     var skinName = $(this).data('skin');
     $('body').removeClass(current_skin);
     $('body').addClass(skinName);
     current_skin = skinName;
+    $.ajax({
+    	url: '${pageContext.request.contextPath}/changeSkin/'+skinName,
+    	success: function(result){
+    		console.log("Changed " + result.data);
+    	}
+    });
   });
 </script>
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
