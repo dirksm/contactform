@@ -11,4 +11,8 @@
 		<put-attribute name="logo-mini" value="IT"/>
 	</definition>
 
+	<definition name="userLayout" template="/WEB-INF/tiles/layout/userlayout.jsp">
+		<put-attribute name="title" value="ITSD | Example Contact Web App"/>
+	</definition>
+
 </tiles-definitions>

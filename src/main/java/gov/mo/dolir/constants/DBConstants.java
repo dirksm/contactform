@@ -13,6 +13,8 @@ public interface DBConstants {
 		public static final String CUSTOMER = SCHEMA+"customer";
 		public static final String CUSTOMER_ADDRESS = SCHEMA+"customer_address";
 		public static final String STATES = SCHEMA+"states";
+		public static final String USERS = SCHEMA+"users";
+		public static final String USER_ROLES = SCHEMA+"user_roles";
 
 
 }

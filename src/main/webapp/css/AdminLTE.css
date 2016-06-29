@@ -3202,6 +3202,7 @@ table.text-center th {
   text-align: center;
   margin-bottom: 25px;
   font-weight: 300;
+  font-variant: small-caps;
 }
 .login-logo a,
 .register-logo a {

@@ -29,6 +29,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
 <script src="${pageContext.request.contextPath}/js/app.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery.md5.js"></script>
   <link rel="stylesheet" href="${pageContext.request.contextPath}/css/AdminLTE.min.css">
   <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
         page. However, you can choose any other skin. Make sure you
@@ -99,14 +100,14 @@ desired effect
             <!-- Menu Toggle Button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <!-- The user image in the navbar-->
-              <img src="${pageContext.request.contextPath}/img/user2-160x160.jpg" class="user-image" alt="User Image">
+              <img class="user-image userImage" alt="User Image">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
               <span class="hidden-xs">ITSD Developer</span>
             </a>
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
               <li class="user-header">
-                <img src="${pageContext.request.contextPath}/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                <img class="img-circle userImage" alt="User Image">
 
                 <p>
                   ITSD Developer - Web Developer
@@ -134,7 +135,7 @@ desired effect
                   <a href="#" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                  <a href="${pageContext.request.contextPath}/logout" class="btn btn-default btn-flat">Sign out</a>
                 </div>
               </li>
             </ul>
@@ -152,7 +153,7 @@ desired effect
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="${pageContext.request.contextPath}/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+          <img class="img-circle userImage" alt="User Image">
         </div>
         <div class="pull-left info">
           <p>ITSD Developer</p>
@@ -230,19 +231,30 @@ desired effect
 <script>
 //Skin switcher
   var current_skin = '${sessionScope.skin!=null?sessionScope.skin:"skin-blue"}';
-  $('#layout-skins-list [data-skin]').click(function(e) {
-    e.preventDefault();
-    var skinName = $(this).data('skin');
-    $('body').removeClass(current_skin);
-    $('body').addClass(skinName);
-    current_skin = skinName;
-    $.ajax({
-    	url: '${pageContext.request.contextPath}/changeSkin/'+skinName,
-    	success: function(result){
-    		console.log("Changed " + result.data);
-    	}
-    });
+  $(document).ready(function(){
+	  
+	  $('#layout-skins-list [data-skin]').click(function(e) {
+	    e.preventDefault();
+	    var skinName = $(this).data('skin');
+	    $('body').removeClass(current_skin);
+	    $('body').addClass(skinName);
+	    current_skin = skinName;
+	    $.ajax({
+	    	url: '${pageContext.request.contextPath}/changeSkin/'+skinName,
+	    	success: function(result){
+	    		console.log("Changed " + result.data);
+	    	}
+	    });
+	  });
+	  
+	  $('.userImage').each(function(){
+		 $(this).attr('src','https://www.gravatar.com/avatar/'+getHash('rrdirks@gmail.com')); 
+	  });
   });
+  function getHash(email) {
+	var em = email.trim().toLowerCase();
+	return $.md5(em);
+  }
 </script>
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the

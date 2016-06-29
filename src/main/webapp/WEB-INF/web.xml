@@ -15,5 +15,42 @@
 		<servlet-name>itsd</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
-
+	
+	<security-constraint>
+	    <web-resource-collection>
+	      <web-resource-name>Some Resource</web-resource-name>
+	      <url-pattern>/</url-pattern>
+	      <http-method>GET</http-method>
+	      <http-method>POST</http-method>
+	    </web-resource-collection>
+		<auth-constraint>
+	      <role-name>*</role-name>
+	    </auth-constraint>
+	</security-constraint>
+	<security-constraint><!--Exclude css and images here -->
+	   <web-resource-collection>
+	      <web-resource-name>Exclude from Security</web-resource-name>
+	      <url-pattern>/img/*</url-pattern><!-- No security for images -->
+	      <url-pattern>/css/*</url-pattern><!-- No security for css -->
+	      <url-pattern>/js/*</url-pattern><!-- No security for js -->
+	      <url-pattern>/bootstrap/*</url-pattern><!-- No security for bootstrap -->
+	      <url-pattern>/plugins/*</url-pattern><!-- No security for plugins -->
+	      <url-pattern>/users/register</url-pattern>
+	   </web-resource-collection>
+    </security-constraint>
+	<security-role>
+  	<description>Administrator</description>
+  	    <role-name>admin</role-name>
+    </security-role>
+	<security-role>
+  	<description>Staff</description>
+  	    <role-name>staff</role-name>
+    </security-role>
+	<login-config>
+    <auth-method>FORM</auth-method>
+    <form-login-config>
+      <form-login-page>/WEB-INF/jsp/login.jsp</form-login-page>
+      <form-error-page>/WEB-INF/jsp/error.jsp</form-error-page>
+    </form-login-config>
+  </login-config>
 </web-app>

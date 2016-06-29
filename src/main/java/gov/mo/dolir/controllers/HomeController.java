@@ -41,4 +41,10 @@ public class HomeController {
 		request.getSession().setAttribute("skin", skin);
 		return new JsonStatusModel(skin, HttpStatus.OK.toString());
 	}
+
+	@RequestMapping(value="/logout")
+	public String logoff(ModelMap map, HttpServletRequest request) {
+		request.getSession().invalidate();
+		return "redirect:/";
+	}
 }
