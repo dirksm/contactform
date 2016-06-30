@@ -128,13 +128,12 @@ private static Logger log = LoggerFactory.getLogger(UserController.class);
 			result.rejectValue("username", "required", null, "This username is already taken.");
 		}
 		if (result.hasErrors()) {
-			System.out.println("result has errors: " + result.getFieldErrors());
-			map.addAttribute("errMsg", "Please fix belows errors before submitting.");
+			map.addAttribute("errMsg", "Please fix below errors before submitting.");
 			map.addAttribute("usersForm", user);
 			return "users.register";
 		} else {
-//			user.setCreatedBy(request.getUserPrincipal().getName());
-//			userService.adduser(user);
+			user.setCreatedBy(user.getUsername());
+			userService.adduser(user);
 			return "redirect:/";
 		}
 	}

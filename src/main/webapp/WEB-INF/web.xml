@@ -11,6 +11,14 @@
 		</init-param>
 		<load-on-startup>0</load-on-startup>
 	</servlet>
+	<filter>
+		<filter-name>userFilter</filter-name>
+		<filter-class>gov.mo.dolir.filters.UserFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>userFilter</filter-name>
+		<url-pattern>/</url-pattern>
+	</filter-mapping>
 	<servlet-mapping>
 		<servlet-name>itsd</servlet-name>
 		<url-pattern>/</url-pattern>
@@ -43,8 +51,8 @@
   	    <role-name>admin</role-name>
     </security-role>
 	<security-role>
-  	<description>Staff</description>
-  	    <role-name>staff</role-name>
+  	<description>User</description>
+  	    <role-name>user</role-name>
     </security-role>
 	<login-config>
     <auth-method>FORM</auth-method>

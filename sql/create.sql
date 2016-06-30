@@ -250,7 +250,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `activated` CHAR(1) NOT NULL DEFAULT 'N' COMMENT '',
   `new_password_key` VARCHAR(128) NULL DEFAULT NULL COMMENT '',
   `new_password_requested` DATETIME NULL DEFAULT NULL COMMENT '',
-  `position` VARCHAR( 64 ) NOT NULL COMMENT 'User Position',
+  `position` VARCHAR( 64 ) DEFAULT NULL COMMENT 'User Position',
   `last_login` DATETIME DEFAULT NULL COMMENT '',
   `created` DATETIME DEFAULT NULL,
   `modified` DATETIME DEFAULT NULL,

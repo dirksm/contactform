@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
   <div class="register-box-body">
     <p class="login-box-msg">Register a new membership</p>
+    <span style="color: red;">${errMsg}</span>
 
     <html:form action="${pageContext.request.contextPath}/users/register" method="post" modelAttribute="usersForm">
       <div class="form-group has-feedback">
