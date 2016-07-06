@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
@@ -22,7 +23,8 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 import gov.mo.dolir.constants.AppConstants;
 import gov.mo.dolir.services.UserService;
 
-@Component
+@Component("userFilter")
+@Configuration
 public class UserFilter implements Filter {
 
 	@Autowired
@@ -40,6 +42,7 @@ public class UserFilter implements Filter {
 			throws IOException, ServletException {
 		HttpServletRequest request = (HttpServletRequest)req;
 		HttpServletResponse response = (HttpServletResponse)resp;
+		System.err.println("userService: "+userService);
 		if(userService==null){
             ServletContext servletContext = request.getSession().getServletContext();
             System.err.println("servletContext: "+servletContext);
@@ -47,7 +50,6 @@ public class UserFilter implements Filter {
             System.err.println("webApplicationContext: "+webApplicationContext);
             userService = webApplicationContext.getBean(UserService.class);
         }
-		System.err.println("userService: "+userService);
 		if (request.getSession().getAttribute(AppConstants.USER_PROFILE) == null && StringUtils.isNotBlank(request.getRemoteUser())) {
 			request.getSession().setAttribute(AppConstants.USER_PROFILE, userService.getUserByUsername(request.getRemoteUser()));
 		}

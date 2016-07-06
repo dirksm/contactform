@@ -8,4 +8,16 @@
 		<put-attribute name="content" value="/WEB-INF/tiles/users/register.jsp"/>
 	</definition>
 
+	<definition name="users.profile" extends="mainLayout">
+		<put-attribute name="content" value="/WEB-INF/tiles/users/profile.jsp"/>
+		<put-attribute name="header" value="User Profile"/>
+		<put-attribute name="optDescription" value=""/>
+	</definition>
+
+	<definition name="users.profile.edit" extends="mainLayout">
+		<put-attribute name="content" value="/WEB-INF/tiles/users/edit.jsp"/>
+		<put-attribute name="header" value="User Profile"/>
+		<put-attribute name="optDescription" value="Edit User Profile"/>
+	</definition>
+
 </tiles-definitions>

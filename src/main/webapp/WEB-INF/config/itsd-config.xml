@@ -12,9 +12,8 @@
 			http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
 
 	<!-- Scans the classpath of this application for @Components to deploy as beans -->
-<!--  <context:annotation-config />
+	<context:annotation-config />
     
- -->   
  	<context:component-scan base-package="gov.mo.dolir"/>
 	<!-- Configures the @Controller programming model -->
 	<mvc:annotation-driven />
@@ -76,5 +75,7 @@
     <!-- Configure bean to convert JSON to POJO and vice versa -->
     <bean id="jsonMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
     </bean>
+    
+   
     
 </beans>

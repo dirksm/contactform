@@ -11,9 +11,12 @@
 		</init-param>
 		<load-on-startup>0</load-on-startup>
 	</servlet>
+	<listener>
+	    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
 	<filter>
 		<filter-name>userFilter</filter-name>
-		<filter-class>gov.mo.dolir.filters.UserFilter</filter-class>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>userFilter</filter-name>

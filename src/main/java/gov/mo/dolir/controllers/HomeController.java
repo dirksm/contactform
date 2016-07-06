@@ -32,7 +32,7 @@ public class HomeController {
 		map.addAttribute("customerCount", customerService.getCustomerCount());
 		map.addAttribute("contactCount", contactService.getContactCount());
 		map.addAttribute("addressCount", addressService.getAddressCount());
-		
+		System.out.println("redirecting to main.index");
 		return "main.index";
 	}
 	

@@ -1,5 +1,6 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -102,7 +103,7 @@ desired effect
               <!-- The user image in the navbar-->
               <img class="user-image userImage" alt="User Image">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
-              <span class="hidden-xs">ITSD Developer</span>
+              <span class="hidden-xs">${userProfile.firstName} ${userProfile.lastName}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
@@ -110,29 +111,15 @@ desired effect
                 <img class="img-circle userImage" alt="User Image">
 
                 <p>
-                  ITSD Developer - Web Developer
-                  <small>Member since Nov. 2012</small>
+                  ${userProfile.firstName} ${userProfile.lastName} <c:if test="${userProfile.position != null && userProfile.position != ''}">- </c:if> ${userProfile.position}
+                  <small>Member since <fmt:formatDate value="${userProfile.created}" pattern="MMM yyyy"/> </small>
                 </p>
               </li>
               <!-- Menu Body -->
-              <li class="user-body">
-                <div class="row">
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Followers</a>
-                  </div>
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Sales</a>
-                  </div>
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Friends</a>
-                  </div>
-                </div>
-                <!-- /.row -->
-              </li>
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Profile</a>
+                  <a href="${pageContext.request.contextPath}/users/profile" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
                   <a href="${pageContext.request.contextPath}/logout" class="btn btn-default btn-flat">Sign out</a>
@@ -156,7 +143,7 @@ desired effect
           <img class="img-circle userImage" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>ITSD Developer</p>
+          <p>${userProfile.firstName} ${userProfile.lastName}</p>
           <!-- Status -->
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
@@ -248,7 +235,7 @@ desired effect
 	  });
 	  
 	  $('.userImage').each(function(){
-		 $(this).attr('src','https://www.gravatar.com/avatar/'+getHash('rrdirks@gmail.com')); 
+		 $(this).attr('src','https://www.gravatar.com/avatar/'+getHash('${userProfile.email}')); 
 	  });
   });
   function getHash(email) {
