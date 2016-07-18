@@ -16,6 +16,10 @@ This is an example of the web application using the following components:
 * Add project to Tomcat server
 * Start server.  Application should be available at [http://localhost:8080/itsd/].
 
+## Database access
+The database is on the Vagrant box and can be accessible by the IP address you set in the Vagrantfile (default to 192.168.33.21).
+You can access PHPMyAdmin from 192.168.33.21/phpmyadmin.  The username is root and the password is the value set by the ```DBROOTPASSWORD``` variable below.  The database is ```contact```.
+
 ## Vagrant setup for Ubuntu 14.04, Apache, MySQL, and phpMyAdmin
 
 ### Description
