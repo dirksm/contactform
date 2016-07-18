@@ -14,7 +14,7 @@ This is an example of the web application using the following components:
 * Import this project into [Spring Tool Suite (STS)](https://spring.io/tools).
 * Right-click on project in STS and select Maven->Update project.
 * Add project to Tomcat server
-* Start server.  Application should be available at (http://localhost:8080/itsd/).
+* Start server.  Application should be available at [http://localhost:8080/itsd/](http://localhost:8080/itsd/).
 
 ## Database access
 The database is on the Vagrant box and can be accessible by the IP address you set in the Vagrantfile (default to 192.168.33.21).
