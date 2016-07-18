@@ -296,13 +296,13 @@ ENGINE = InnoDB
 COMMENT 'Maps user to user roles.  Used for security realm';
 
 INSERT INTO `users` (`username`, `password`, `first_name`, `last_name`, `email`, `activated`, `new_password_key`, `new_password_requested`, `last_login`, `created_by`) VALUES
-('dirksm', '6ca13d52ca70c883e0f0bb101e425a89e8624de51db2d2392593af6a84118090', 'Michael', 'Dirks', 'dirksm@email.net', 'Y', NULL, NULL, NULL, 'dirksm');
+('testadmin', '6ca13d52ca70c883e0f0bb101e425a89e8624de51db2d2392593af6a84118090', 'Test', 'Admin', 'admin@email.net', 'Y', NULL, NULL, NULL, 'system');
 INSERT INTO `users` (`username`, `password`, `first_name`, `last_name`, `email`, `activated`, `new_password_key`, `new_password_requested`, `last_login`, `created_by`) VALUES
-('testuser', '6ca13d52ca70c883e0f0bb101e425a89e8624de51db2d2392593af6a84118090', 'Test', 'User', 'test@email.net', 'Y', NULL, NULL, NULL, 'dirksm');
+('testuser', '6ca13d52ca70c883e0f0bb101e425a89e8624de51db2d2392593af6a84118090', 'Test', 'User', 'test@email.net', 'Y', NULL, NULL, NULL, 'system');
 
 INSERT INTO `user_roles` (`username`, `role`) VALUES
-('dirksm', 'admin'),
-('dirksm', 'user'),
+('testadmin', 'admin'),
+('testadmin', 'user'),
 ('testuser', 'user');
 
 
