@@ -17,6 +17,14 @@ This is an example of the web application using the following components:
 * Start server.  Application should be available at [http://localhost:8080/itsd/](http://localhost:8080/itsd/).
 * Log in as either 'testadmin' or 'testuser' with password of 'abc123'
 
+## Steps to deploy
+This application can be deployed to a war file and deployed to a Tomcat or similar JEE web container.  
+To deploy:
+* Right click on the project and select Run As -> Maven build...
+* Enter 'clean install -Denvironment=production' in the goals field.  
+* Click 'Apply' and 'Run'
+* The deployment artifact will be available in the target folder.
+
 ## Database access
 The database is on the Vagrant box and can be accessible by the IP address you set in the Vagrantfile (default to 192.168.33.21).
 You can access PHPMyAdmin from [http://192.168.33.21/phpmyadmin](http://192.168.33.21/phpmyadmin).  The username is root and the password is the value set by the ```DBROOTPASSWORD``` variable below.  The database is name ```contact```.

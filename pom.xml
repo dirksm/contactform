@@ -42,6 +42,11 @@
   	
   	<imgscalr.version>4.2</imgscalr.version>
   	<displaytag.version>1.2</displaytag.version>
+
+    <database.password>12345678</database.password>
+    <database.username>root</database.username>
+    <database.url>jdbc:mysql://192.168.33.21:3306/contact</database.url>
+
   </properties>
   <dependencies>
 
@@ -200,6 +205,34 @@
 	      <target>${java.version}</target>
 	    </configuration>
 	  </plugin>
+	  <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-war-plugin</artifactId>
+        <configuration>
+            <webResources>
+                <resource>
+                    <directory>src/main/webapp/META-INF</directory>
+                    <filtering>true</filtering>
+                    <targetPath>META-INF</targetPath>
+                </resource>
+            </webResources>
+        </configuration>
+      </plugin>
 	</plugins>
   </build>
+	<profiles>  
+	   <profile>   
+	       <id>prod</id>
+	       <activation>
+	       		<property>
+	       			<name>environment</name>
+	       			<value>production</value>
+	       		</property>
+	       </activation>
+	       <properties>
+		    <database.username>contact</database.username>
+	        <database.url>jdbc:mysql://localhost:3306/contact</database.url> 
+	       </properties>
+	   </profile>
+	</profiles>  
 </project>
