@@ -47,6 +47,8 @@
 	      <url-pattern>/bootstrap/*</url-pattern><!-- No security for bootstrap -->
 	      <url-pattern>/plugins/*</url-pattern><!-- No security for plugins -->
 	      <url-pattern>/users/register</url-pattern>
+	      <url-pattern>/users/forgotPassword/*</url-pattern>
+	      <url-pattern>/users/resetPassword/*</url-pattern>
 	   </web-resource-collection>
     </security-constraint>
 	<security-role>

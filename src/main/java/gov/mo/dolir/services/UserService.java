@@ -9,8 +9,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import gov.mo.dolir.dao.UserAuthDAO;
 import gov.mo.dolir.dao.UserDAO;
 import gov.mo.dolir.dao.UserRolesDAO;
+import gov.mo.dolir.models.PasswordResetModel;
 import gov.mo.dolir.models.UserModel;
 
 @Service("userService")
@@ -23,6 +25,8 @@ public class UserService {
     private UserDAO userDao;
 	@Autowired
 	private UserRolesDAO userRolesDao;
+	@Autowired
+	private UserAuthDAO userAuthDao;
 
     public List<UserModel> getUsersList() {
     	List<UserModel> users = userDao.getUsersList(); 
@@ -95,4 +99,29 @@ public class UserService {
     	return userDao.validateUser(username, password);
     }
     
+    public boolean doesUserExist(String userName)
+    {
+		return userAuthDao.doesUserExist(userName);
+    }
+	
+	@Transactional(propagation=Propagation.REQUIRED)
+	public String setPasswordResetKey(String username) {
+		return userAuthDao.setPasswordResetKey(username);
+	}
+	
+	@Transactional(propagation=Propagation.REQUIRED)
+	public int resetPassword(Integer id, String username, String password){
+		int numrows = 0;
+		numrows += userAuthDao.clearPasswordResetKeys(id);
+		numrows += userDao.updatePassword(username, password, username);
+		return numrows;
+	}
+	
+	public UserModel getUserByEmail(String email) {
+		return userDao.getUserByEmail(email);
+	}
+
+	public PasswordResetModel getResetInfo(Integer id) {
+		return userAuthDao.getResetInfo(id);
+	}
 }

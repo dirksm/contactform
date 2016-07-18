@@ -14,10 +14,34 @@
 		<put-attribute name="optDescription" value=""/>
 	</definition>
 
+	<definition name="users.changePasswd" extends="mainLayout">
+		<put-attribute name="content" value="/WEB-INF/tiles/users/changePassword.jsp"/>
+		<put-attribute name="header" value="User Profile"/>
+		<put-attribute name="optDescription" value=""/>
+	</definition>
+
+
 	<definition name="users.profile.edit" extends="mainLayout">
 		<put-attribute name="content" value="/WEB-INF/tiles/users/edit.jsp"/>
 		<put-attribute name="header" value="User Profile"/>
 		<put-attribute name="optDescription" value="Edit User Profile"/>
 	</definition>
+
+	<definition name="user.emailText" extends="userLayout">
+		<put-attribute name="content" value="/WEB-INF/tiles/users/emailText.jsp"/>
+	</definition>
+
+	<definition name="user.passwdResetInvalid" extends="userLayout">
+		<put-attribute name="content" value="/WEB-INF/tiles/users/passwdResetInvalid.jsp"/>
+	</definition>
+
+	<definition name="user.forgotPassword" extends="userLayout">
+		<put-attribute name="content" value="/WEB-INF/tiles/users/forgotPassword.jsp"/>
+	</definition>
+
+	<definition name="user.resetPassword" extends="userLayout">
+		<put-attribute name="content" value="/WEB-INF/tiles/users/resetPassword.jsp"/>
+	</definition>
+
 
 </tiles-definitions>

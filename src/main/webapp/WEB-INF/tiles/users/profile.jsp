@@ -17,7 +17,7 @@ $(document).ready(function(){
               <p class="text-muted text-center">${user.position}</p>
               
               <p class="text-muted text-center">${user.email}</p>
-			  <a href="#" class="btn btn-primary btn-block"><i class="fa fa-lock"></i>&nbsp;&nbsp;<b>Change Password</b></a><br/>
+			  <a href="${pageContext.request.contextPath}/users/changePasswd" class="btn btn-primary btn-block"><i class="fa fa-lock"></i>&nbsp;&nbsp;<b>Change Password</b></a><br/>
 			  <a href="${pageContext.request.contextPath}/users/editProfile" class="btn btn-primary btn-block"><i class="fa fa-edit"></i>&nbsp;&nbsp;<b>Edit Profile</b></a>
             </div>
         </div>

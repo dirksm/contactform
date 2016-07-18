@@ -61,7 +61,7 @@
       </div>
     </form>
 
-    <a href="#">I forgot my password</a><br>
+    <a href="${pageContext.request.contextPath}/users/forgotPassword">I forgot my password</a><br>
     <a href="${pageContext.request.contextPath}/users/register" class="text-center">Register a new membership</a>
 
   </div>

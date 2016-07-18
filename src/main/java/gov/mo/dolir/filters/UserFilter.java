@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
@@ -27,6 +29,8 @@ import gov.mo.dolir.services.UserService;
 @Configuration
 public class UserFilter implements Filter {
 
+	Logger log = LoggerFactory.getLogger(UserFilter.class);
+	
 	@Autowired
 	UserService userService;
 	
@@ -42,12 +46,12 @@ public class UserFilter implements Filter {
 			throws IOException, ServletException {
 		HttpServletRequest request = (HttpServletRequest)req;
 		HttpServletResponse response = (HttpServletResponse)resp;
-		System.err.println("userService: "+userService);
+		log.debug("userService: "+userService);
 		if(userService==null){
             ServletContext servletContext = request.getSession().getServletContext();
-            System.err.println("servletContext: "+servletContext);
+            log.debug("servletContext: "+servletContext);
             WebApplicationContext webApplicationContext = WebApplicationContextUtils.getWebApplicationContext(servletContext);
-            System.err.println("webApplicationContext: "+webApplicationContext);
+            log.debug("webApplicationContext: "+webApplicationContext);
             userService = webApplicationContext.getBean(UserService.class);
         }
 		if (request.getSession().getAttribute(AppConstants.USER_PROFILE) == null && StringUtils.isNotBlank(request.getRemoteUser())) {

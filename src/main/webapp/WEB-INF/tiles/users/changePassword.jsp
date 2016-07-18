@@ -1,8 +1,11 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="html" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<script type="text/javascript" src="${pageContext.request.contextPath}/plugins/pwstrength/pwstrength-bootstrap.min.js"></script>
 <script>
 $(document).ready(function(){
 	$('.profile-user-img').attr('src','https://www.gravatar.com/avatar/'+getHash('${usersForm.email}')); 
+	$('#password').pwstrength();
+	$('#oldPassword').focus();
 });
 </script>
 <section class="content">
@@ -19,8 +22,8 @@ $(document).ready(function(){
               <p class="text-muted text-center">${usersForm.position}</p>
               
               <p class="text-muted text-center">${usersForm.email}</p>
-			  <a href="#" class="btn btn-primary btn-block"><i class="fa fa-lock"></i>&nbsp;&nbsp;<b>Change Password</b></a><br/>
-			  <a href="#" class="btn btn-primary btn-block"><i class="fa fa-edit"></i>&nbsp;&nbsp;<b>Edit Profile</b></a>
+			  <a href="${pageContext.request.contextPath}/users/changePasswd" class="btn btn-primary btn-block"><i class="fa fa-lock"></i>&nbsp;&nbsp;<b>Change Password</b></a><br/>
+			  <a href="${pageContext.request.contextPath}/users/editProfile" class="btn btn-primary btn-block"><i class="fa fa-edit"></i>&nbsp;&nbsp;<b>Edit Profile</b></a>
             </div>
         </div>
       </div>
@@ -31,7 +34,7 @@ $(document).ready(function(){
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-                <html:form class="form-horizontal" modelAttribute="usersForm" action="${pageContext.request.contextPath}/users/editProfile" method="post">
+                <html:form class="form-horizontal" modelAttribute="usersForm" action="${pageContext.request.contextPath}/users/changePasswd" method="post">
                 <html:hidden path="username"/>
                   <div class="form-group">
                     <label for="username" class="col-sm-2 control-label">Username:</label>
@@ -41,28 +44,28 @@ $(document).ready(function(){
                      </div>
                   </div>
                   <div class="form-group">
-                    <label for="firstName" class="col-sm-2 control-label">First Name:</label>
+                    <label for="oldPassword" class="col-sm-2 control-label">Current Password:</label>
 
                     <div class="col-sm-10">
-				       <html:input class="form-control" placeholder="First Name" id="firstName" path="firstName" required="required" />
-				        <span style="color: red;"><html:errors path="firstName" cssClass="err" /></span>
+				       <html:password class="form-control" placeholder="Current Password" id="oldPassword" path="oldPassword" required="required" />
+				        <span style="color: red;"><html:errors path="oldPassword" cssClass="err" /></span>
                      </div>
                   </div>
                   <div class="form-group">
-                    <label for="lastName" class="col-sm-2 control-label">Last Name:</label>
+                    <label for="password" class="col-sm-2 control-label">New Password:</label>
 
                     <div class="col-sm-10">
-				       <html:input class="form-control" placeholder="Last Name" id="lastName" path="lastName" required="required" />
-				        <span style="color: red;"><html:errors path="lastName" cssClass="err" /></span>
+				       <html:password class="form-control" placeholder="New Password" id="password" path="password" required="required" />
+				        <span style="color: red;"><html:errors path="password" cssClass="err" /></span>
                      </div>
                   </div>
                   <div class="form-group">
-                    <label for="email" class="col-sm-2 control-label">Email</label>
+                    <label for="password2" class="col-sm-2 control-label">New Password (again):</label>
 
                     <div class="col-sm-10">
-						<html:input class="form-control" placeholder="Email" id="email" path="email" required="required" type="email" />
-				        <span style="color: red;"><html:errors path="email" cssClass="err" /></span>
-                    </div>
+				       <html:password class="form-control" placeholder="New Password" id="password2" path="password2" required="required" />
+				        <span style="color: red;"><html:errors path="password2" cssClass="err" /></span>
+                     </div>
                   </div>
                   <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">

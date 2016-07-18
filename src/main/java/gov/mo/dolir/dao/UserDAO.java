@@ -180,6 +180,24 @@ public class UserDAO implements DBConstants {
         return matches!=null&&matches.size()>0?matches.get(0):null;
     }
 
+    public UserModel getUserByEmail(String email) {
+		String sqlString = "select id, username, first_name, last_name, email from " + USERS + "  where email = ?";
+        Object[] args = {email};
+        List<UserModel> matches = getTemplate().query(sqlString, args, new RowMapper<UserModel>() {
+                public UserModel mapRow(ResultSet rs, int rowNum) throws SQLException {
+                	UserModel model = new UserModel();
+                    model.setId(rs.getInt("id"));
+                    model.setUsername(rs.getString("username"));
+                    model.setFirstName(rs.getString("first_name"));
+                    model.setLastName(rs.getString("last_name"));
+                    model.setEmail(rs.getString("email"));
+                	return model;
+                }
+        });
+        return matches != null && matches.size() > 0 ? matches.get(0): null;
+		
+	}
+    
     public List<UserModel> getUsersList() {
     String sqlString = "select " +
         "id" +

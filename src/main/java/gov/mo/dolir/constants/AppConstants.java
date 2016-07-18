@@ -24,4 +24,9 @@ public class AppConstants {
 	
 	public static final String USER_PROFILE = "userProfile";
 	
+	public static final String FROM_EMAIL = "noreply@email.com";
+	public static final String FROM_NAME = "Contact Form";
+	public static final String FORGOT_PASSWORD_SUBJECT = "Forgot your password on Contact Form?";
+}
+
 }
