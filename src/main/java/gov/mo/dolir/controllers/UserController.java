@@ -218,7 +218,7 @@ private static Logger log = LoggerFactory.getLogger(UserController.class);
 	}
 
 	@RequestMapping(value="/resetPassword", method=RequestMethod.POST)
-	public String resetPassword(@ModelAttribute("prmForm") PasswordResetModel prm, Model map) {
+	public String resetPassword(@ModelAttribute("prmForm") PasswordResetModel prm, BindingResult result, Model map) {
 		boolean resetKeyValid = isResetKeyValid(prm.getId(), prm.getKey());
 		if (resetKeyValid) {
 			if (prm.passwordsMatch()) {
@@ -226,7 +226,7 @@ private static Logger log = LoggerFactory.getLogger(UserController.class);
 				userService.resetPassword(prm.getId(), existing.getUsername(), prm.getPassword());
 				return "redirect:/";
 			} else {
-				map.addAttribute("msg", "Passwords don't match.");
+				map.addAttribute("errMsg", "Passwords don't match.");
 				map.addAttribute("prmForm", prm);
 				return "user.resetPassword";
 			}
