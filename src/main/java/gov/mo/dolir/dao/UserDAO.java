@@ -71,7 +71,6 @@ public class UserDAO implements DBConstants {
         .append(" first_name = ? " )
         .append(", last_name = ? " )
         .append(", email = ? " )
-        .append(", activated = ? " )
         .append(", position = ? " )
         .append(", modified_by = ? " ); 
         StringBuffer sWhereStmt = new StringBuffer(100);
@@ -81,7 +80,6 @@ public class UserDAO implements DBConstants {
             bean.getFirstName(), 
             bean.getLastName(), 
             bean.getEmail(), 
-            bean.isActivated(), 
             bean.getPosition(), 
             bean.getModifiedBy(),
             bean.getId()};

@@ -21,10 +21,11 @@ public class CustomerController {
 	CustomerService customerService;
 	
 	@RequestMapping(value={"/list", "/"})
-	public String getCustomers(ModelMap map) {
+	public String getCustomers(ModelMap map) throws Exception {
 		List<CustomerModel> list = customerService.getCustomerList();
 		map.addAttribute("customers", list);
-		return "customer.list";
+		throw new Exception("thrown exception.....");
+//		return "customer.list";
 	}
 	
 	@RequestMapping(value="/edit/{id}", method=RequestMethod.GET)

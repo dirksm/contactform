@@ -28,5 +28,3 @@ public class AppConstants {
 	public static final String FROM_NAME = "Contact Form";
 	public static final String FORGOT_PASSWORD_SUBJECT = "Forgot your password on Contact Form?";
 }
-
-}

@@ -55,6 +55,8 @@ public class UserFilter implements Filter {
             userService = webApplicationContext.getBean(UserService.class);
         }
 		if (request.getSession().getAttribute(AppConstants.USER_PROFILE) == null && StringUtils.isNotBlank(request.getRemoteUser())) {
+			log.debug("Setting last log in for " + request.getRemoteUser() + " and populating the user profile in the session.");
+			userService.setLastLoggedIn(request.getRemoteUser());
 			request.getSession().setAttribute(AppConstants.USER_PROFILE, userService.getUserByUsername(request.getRemoteUser()));
 		}
 		chain.doFilter(req, resp);

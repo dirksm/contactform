@@ -58,6 +58,7 @@ private static Logger log = LoggerFactory.getLogger(UserController.class);
 	@RequestMapping(value="/edit/{id}", method=RequestMethod.GET)
 	public String editUserForm(@PathVariable String id, ModelMap map) {
 		map.addAttribute("usersForm", userService.getUsers(new Integer(id)));
+		map.addAttribute("user", userService.getUsers(new Integer(id)));
 		return "users.edit";
 	}
 
@@ -84,6 +85,7 @@ private static Logger log = LoggerFactory.getLogger(UserController.class);
 	@RequestMapping(value="/changePasswd", method=RequestMethod.GET)
 	public String changeUserPassword(ModelMap map, HttpServletRequest request) {
 		map.addAttribute("usersForm", userService.getUserByUsername(request.getRemoteUser()));
+		map.addAttribute("user", userService.getUserByUsername(request.getRemoteUser()));
 		return "users.changePasswd";
 	}
 
@@ -116,7 +118,8 @@ private static Logger log = LoggerFactory.getLogger(UserController.class);
 
 	@RequestMapping(value="/editProfile", method=RequestMethod.GET)
 	public String editProfile(ModelMap map, HttpServletRequest request) {
-		map.addAttribute("usersForm", userService.getUserByUsername(request.getUserPrincipal().getName()));
+		map.addAttribute("usersForm", userService.getUserByUsername(request.getRemoteUser()));
+		map.addAttribute("user", userService.getUserByUsername(request.getRemoteUser()));
 		return "users.profile.edit";
 	}
 
@@ -172,15 +175,18 @@ private static Logger log = LoggerFactory.getLogger(UserController.class);
 	@RequestMapping(value="/forgotPassword", method=RequestMethod.POST)
 	public String sendForgotPasswordEmail(@RequestParam("email") String email, ModelMap map, HttpServletRequest request) {
 		if (StringUtils.isBlank(email)) {
-			map.addAttribute("msg", "Email address is required.");
+			map.addAttribute("usersForm", new UserModel());
+			map.addAttribute("errMsg", "Email address is required.");
 			return "user.forgotPassword";
 		} else if (!AppUtil.isValidEmail(email)) {
-			map.addAttribute("msg", "Not a valid email address.");
+			map.addAttribute("usersForm", new UserModel());
+			map.addAttribute("errMsg", "Not a valid email address.");
 			return "user.forgotPassword";
 		}
 		UserModel user = userService.getUserByEmail(email);
 		if (user == null) {
-			map.addAttribute("msg", "Email address not found.");
+			map.addAttribute("usersForm", new UserModel());
+			map.addAttribute("errMsg", "Email address not found.");
 			return "user.forgotPassword";
 		} else {
 			String key = userService.setPasswordResetKey(user.getUsername());
@@ -193,11 +199,13 @@ private static Logger log = LoggerFactory.getLogger(UserController.class);
 					return "user.emailText";
 				} catch (UnsupportedEncodingException | AddressException e) {
 					log.error("UnsupportedEncodingException | Address Exception sending email: " + e.getMessage(), e);
-					map.addAttribute("msg", "There was an error resetting your password. Please try again.");
+					map.addAttribute("usersForm", new UserModel());
+					map.addAttribute("errMsg", "There was an error resetting your password. Please try again.");
 					return "user.forgotPassword";
 				}
 			} else {
-				map.addAttribute("msg", "There was an error resetting your password. Please try again.");
+				map.addAttribute("usersForm", new UserModel());
+				map.addAttribute("errMsg", "There was an error resetting your password. Please try again.");
 				return "user.forgotPassword";
 			}
 		}
@@ -246,7 +254,7 @@ private static Logger log = LoggerFactory.getLogger(UserController.class);
 		Date now = new Date();
 		boolean isValid = false;
 		if (existing != null) {
-			Date expirationDate = DateUtil.addDays(existing.getRequestDate(), 14);
+			Date expirationDate = DateUtil.addDays(existing.getRequestDate(), 1);
 			if (StringUtils.isNotBlank(key) && key.equals(existing.getKey()) && expirationDate!=null && now.compareTo(expirationDate) < 0) {
 				isValid = true;
 			}

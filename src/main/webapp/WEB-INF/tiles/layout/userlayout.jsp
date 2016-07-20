@@ -11,6 +11,7 @@
   <title><tiles:insertAttribute name="title"/></title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <link href="${pageContext.request.contextPath}/img/favicon.ico" rel="icon" type="image/x-icon" />
   <!-- Bootstrap 3.3.6 -->
   <link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css">
   <!-- Font Awesome -->
@@ -21,6 +22,14 @@
   <link rel="stylesheet" href="${pageContext.request.contextPath}/css/AdminLTE.min.css">
   <!-- iCheck -->
   <link rel="stylesheet" href="${pageContext.request.contextPath}/plugins/iCheck/square/blue.css">
+  
+	<!-- jQuery 2.2.0 -->
+	<script src="${pageContext.request.contextPath}/plugins/jQuery/jQuery-2.2.0.min.js"></script>
+	<!-- Bootstrap 3.3.6 -->
+	<script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js"></script>
+	<!-- iCheck -->
+	<script src="${pageContext.request.contextPath}/plugins/iCheck/icheck.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/plugins/pwstrength/pwstrength-bootstrap.min.js"></script>
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -38,12 +47,6 @@
 </div>
 <!-- /.register-box -->
 
-<!-- jQuery 2.2.0 -->
-<script src="${pageContext.request.contextPath}/plugins/jQuery/jQuery-2.2.0.min.js"></script>
-<!-- Bootstrap 3.3.6 -->
-<script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js"></script>
-<!-- iCheck -->
-<script src="${pageContext.request.contextPath}/plugins/iCheck/icheck.min.js"></script>
 <script>
 	$(document).ready(function(){
 	    $('input').iCheck({
@@ -53,5 +56,6 @@
 	      });
 	});
 </script>
+
 </body>
 </html>

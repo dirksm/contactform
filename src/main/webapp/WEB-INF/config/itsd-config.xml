@@ -35,6 +35,7 @@
        <property name="definitions">
            <list>
 <!-- <value>/WEB-INF/error/tiles.xml</value> -->                   
+				   <value>/WEB-INF/error/tiles.xml</value>
                    <value>/WEB-INF/tiles/address/tiles.xml</value>
                    <value>/WEB-INF/tiles/contact/tiles.xml</value>
                    <value>/WEB-INF/tiles/customer/tiles.xml</value>
