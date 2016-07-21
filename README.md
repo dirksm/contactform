@@ -33,7 +33,7 @@ You can access PHPMyAdmin from [http://192.168.33.21/phpmyadmin](http://192.168.
 ## Mail server development
 This project uses [MailCatcher](https://mailcatcher.me) to use as a development email SMTP server.  This allows the developer to test email functionality without having to accidentally send emails to actual users.  The current setup uses Ruby version 1.9.x but MailCatcher needs
 version > 2.0.x.  There are some workarounds in the batch file to ensure that MailCatcher is set up correctly.  To access the web interface,
-navigate to http://192.168.33.21/mailcatcher. The IP address mail change depending on your IP setting for your private network in the Vagrantfile
+navigate to http://192.168.33.21/mailcatcher. The IP address may change depending on your IP setting for your private network in the Vagrantfile
 file.
 
 ## Vagrant setup for Ubuntu 14.04, Apache, MySQL, and phpMyAdmin
